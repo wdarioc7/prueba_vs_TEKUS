@@ -1,0 +1,51 @@
+﻿@model TEKUS_V1_2018.Models.TBL_TEKUS_CLIENTES
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TBL_TEKUS_CLIENTES</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NIT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NIT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CORREOE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CORREOE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TBL_TEKUS_PAIS.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TBL_TEKUS_PAIS.NOMBRE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_CLIENTES }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
