@@ -45,24 +45,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-<<<<<<< HEAD
-=======
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
->>>>>>> fdad05d776d167d2b90e8447c31124a108ac7916
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-<<<<<<< HEAD
-=======
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
->>>>>>> fdad05d776d167d2b90e8447c31124a108ac7916
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -162,42 +148,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-<<<<<<< HEAD
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-=======
-    <Compile Include="Controllers\TBL_TEKUS_CLIENTESController.cs" />
-    <Compile Include="Controllers\TBL_TEKUS_PAISController.cs" />
-    <Compile Include="Controllers\TBL_TEKUS_SERVICIOSController.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ModelBDTEKUS.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelBDTEKUS.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ModelBDTEKUS.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelBDTEKUS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ModelBDTEKUS.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelBDTEKUS.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TBL_TEKUS_CLIENTES.cs">
-      <DependentUpon>ModelBDTEKUS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TBL_TEKUS_PAIS.cs">
-      <DependentUpon>ModelBDTEKUS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TBL_TEKUS_SERVICIOS.cs">
-      <DependentUpon>ModelBDTEKUS.tt</DependentUpon>
-    </Compile>
->>>>>>> fdad05d776d167d2b90e8447c31124a108ac7916
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -209,34 +162,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-<<<<<<< HEAD
-=======
-    <Content Include="Models\ModelBDTEKUS.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModelBDTEKUS.Context.cs</LastGenOutput>
-      <DependentUpon>ModelBDTEKUS.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\ModelBDTEKUS.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelBDTEKUS.edmx</DependentUpon>
-      <LastGenOutput>ModelBDTEKUS.cs</LastGenOutput>
-    </Content>
->>>>>>> fdad05d776d167d2b90e8447c31124a108ac7916
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-<<<<<<< HEAD
-=======
-    <EntityDeploy Include="Models\ModelBDTEKUS.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelBDTEKUS.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ModelBDTEKUS.edmx.diagram">
-      <DependentUpon>ModelBDTEKUS.edmx</DependentUpon>
-    </Content>
->>>>>>> fdad05d776d167d2b90e8447c31124a108ac7916
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -262,31 +192,10 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-<<<<<<< HEAD
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-=======
-    <Content Include="Views\TBL_TEKUS_CLIENTES\Create.cshtml" />
-    <Content Include="Views\TBL_TEKUS_CLIENTES\Delete.cshtml" />
-    <Content Include="Views\TBL_TEKUS_CLIENTES\Details.cshtml" />
-    <Content Include="Views\TBL_TEKUS_CLIENTES\Edit.cshtml" />
-    <Content Include="Views\TBL_TEKUS_CLIENTES\Index.cshtml" />
-    <Content Include="Views\TBL_TEKUS_PAIS\Create.cshtml" />
-    <Content Include="Views\TBL_TEKUS_PAIS\Delete.cshtml" />
-    <Content Include="Views\TBL_TEKUS_PAIS\Details.cshtml" />
-    <Content Include="Views\TBL_TEKUS_PAIS\Edit.cshtml" />
-    <Content Include="Views\TBL_TEKUS_PAIS\Index.cshtml" />
-    <Content Include="Views\TBL_TEKUS_SERVICIOS\Create.cshtml" />
-    <Content Include="Views\TBL_TEKUS_SERVICIOS\Delete.cshtml" />
-    <Content Include="Views\TBL_TEKUS_SERVICIOS\Details.cshtml" />
-    <Content Include="Views\TBL_TEKUS_SERVICIOS\Edit.cshtml" />
-    <Content Include="Views\TBL_TEKUS_SERVICIOS\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
->>>>>>> fdad05d776d167d2b90e8447c31124a108ac7916
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -301,12 +210,6 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
-<<<<<<< HEAD
-=======
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
->>>>>>> fdad05d776d167d2b90e8447c31124a108ac7916
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
