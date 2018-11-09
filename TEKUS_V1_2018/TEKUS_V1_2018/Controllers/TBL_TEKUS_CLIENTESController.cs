@@ -18,6 +18,7 @@ namespace TEKUS_V1_2018.Controllers
         public ActionResult Index()
         {
             var tBL_TEKUS_CLIENTES = db.TBL_TEKUS_CLIENTES.Include(t => t.TBL_TEKUS_PAIS);
+            @ViewBag.TotalClientes = db.TBL_TEKUS_CLIENTES.Count();
             return View(tBL_TEKUS_CLIENTES.ToList());
         }
 

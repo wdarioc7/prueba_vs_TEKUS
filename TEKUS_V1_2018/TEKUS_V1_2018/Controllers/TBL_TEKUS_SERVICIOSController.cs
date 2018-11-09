@@ -17,7 +17,15 @@ namespace TEKUS_V1_2018.Controllers
         // GET: TBL_TEKUS_SERVICIOS
         public ActionResult Index()
         {
+
             var tBL_TEKUS_SERVICIOS = db.TBL_TEKUS_SERVICIOS.Include(t => t.TBL_TEKUS_CLIENTES);
+            @ViewBag.Servicios = db.TBL_TEKUS_SERVICIOS.Count();
+            foreach (var item in tBL_TEKUS_SERVICIOS)
+            {
+                var clientes = item.ID_CLIENTE;
+                
+
+            }
             return View(tBL_TEKUS_SERVICIOS.ToList());
         }
 
