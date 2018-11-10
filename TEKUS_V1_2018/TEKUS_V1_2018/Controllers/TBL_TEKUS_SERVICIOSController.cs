@@ -15,7 +15,31 @@ namespace TEKUS_V1_2018.Controllers
         private sisteman_TEKUSEntities db = new sisteman_TEKUSEntities();
 
         // GET: TBL_TEKUS_SERVICIOS
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    @ViewBag.Servicios = db.TBL_TEKUS_SERVICIOS.Count();
+
+        //    List<TBL_TEKUS_SERVICIOS> pais = db.TBL_TEKUS_SERVICIOS.ToList();
+        //    //var PAIS = pais.Distinct().Count();
+        //    //var paises = pais.GroupBy(x => x).Select(g => new { Value = g.Key, Count = g.Count() }).OrderByDescending(x => x.Count);
+
+        //    //Cito a leandro tutiny blog http://ltuttini.blogspot.com/2010/03/buscar-en-una-lista-contenido-repetido.html 
+        //    //PERMITE REALIZAR LA CONSULTA DE PAISES POR SERVICIO Y CALCULAR EL NUMERO DE EXISTENCIAS POR PALABRA -- BIG DATA
+        //    var paises = from item in pais
+        //                 let extension = item.ID_PAIS
+        //                 group item by extension into g
+        //                 select new { Key = g.Key, Values = g.Count() };
+
+
+
+        //    ViewBag.paises = paises.ToList();
+           
+
+
+        //    var tBL_TEKUS_SERVICIOS = db.TBL_TEKUS_SERVICIOS.Include(t => t.TBL_TEKUS_CLIENTES).Include(t => t.TBL_TEKUS_PAIS);
+        //    return View(tBL_TEKUS_SERVICIOS.ToList());
+        //}
+        public ViewResult Index(string sortOrder)
         {
             @ViewBag.Servicios = db.TBL_TEKUS_SERVICIOS.Count();
 
@@ -33,13 +57,28 @@ namespace TEKUS_V1_2018.Controllers
 
 
             ViewBag.paises = paises.ToList();
-           
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "ProductName desc" : "";
+            ViewBag.UnitPriceSortParm = sortOrder == "UnitPrice" ? "UnitPrice desc" : "UnitPrice";
 
+            var products = db.TBL_TEKUS_SERVICIOS.Include(t => t.TBL_TEKUS_CLIENTES).Include(t => t.TBL_TEKUS_PAIS);
 
-            var tBL_TEKUS_SERVICIOS = db.TBL_TEKUS_SERVICIOS.Include(t => t.TBL_TEKUS_CLIENTES).Include(t => t.TBL_TEKUS_PAIS);
-            return View(tBL_TEKUS_SERVICIOS.ToList());
+            switch (sortOrder)
+            {
+                case "ProductName desc":
+                    products = products.OrderByDescending(s => s.NOMBRE);
+                    break;
+                case "UnitPrice":
+                    products = products.OrderBy(s => s.ID_CLIENTE);
+                    break;
+                case "UnitPrice desc":
+                    products = products.OrderByDescending(s => s.ID_SERVICIOS);
+                    break;
+                default:
+                    products = products.OrderBy(s => s.NOMBRE);
+                    break;
+            }
+            return View(products.ToList());
         }
-
         // GET: TBL_TEKUS_SERVICIOS/Details/5
         public ActionResult Details(decimal id)
         {
