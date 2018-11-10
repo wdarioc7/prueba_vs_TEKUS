@@ -4,58 +4,92 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <style>
+        table, th, td {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+            table tr:nth-child(odd) {
+                background-color: #f1f1f1;
+            }
+
+            table tr:nth-child(even) {
+                background-color: #ffffff;
+            }
+    </style>
+</head>
+
+
 
 <h2>Index</h2>
+
+
+
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('customersCtrl', function ($scope, $http) {
+        $http.get("http://www.w3schools.com/angular/customers.php")
+            .success(function (response) { $scope.names = response.records; });
+    });
+</script>
+
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <p>CANTIDAD DE SERVICIOS: @ViewBag.Servicios</p>
 <p>
-   
 
-        @Html.ListBox("ListaTareas", new SelectList(ViewBag.paises), htmlAttributes: new { @style = "width:280px;height :90px" })
 
-   
+    @Html.ListBox("ListaPaises", new SelectList(ViewBag.paises), htmlAttributes: new { @style = "width:280px;height :90px" })
+
+
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NOMBRE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VPORHORA)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TBL_TEKUS_CLIENTES.NOMBRE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TBL_TEKUS_PAIS.NOMBRE)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div ng-app="myApp" ng-controller="customersCtrl">
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NOMBRE)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VPORHORA)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TBL_TEKUS_CLIENTES.NOMBRE)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TBL_TEKUS_PAIS.NOMBRE)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID_SERVICIOS }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID_SERVICIOS }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID_SERVICIOS })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.NOMBRE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VPORHORA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TBL_TEKUS_CLIENTES.NOMBRE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TBL_TEKUS_PAIS.NOMBRE)
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOMBRE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VPORHORA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TBL_TEKUS_CLIENTES.NOMBRE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TBL_TEKUS_PAIS.NOMBRE)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID_SERVICIOS }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID_SERVICIOS }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID_SERVICIOS })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>
