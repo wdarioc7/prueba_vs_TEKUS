@@ -29,12 +29,11 @@ namespace TEKUS_V1_2018.Controllers
                          let extension = item.ID_PAIS
                          group item by extension into g
                          select new { Key = g.Key, Values = g.Count() };
-            foreach (var item1 in paises)
-            {
-                ViewBag.value = item1.Key;
-                ViewBag.valor = item1.Values;
-            }
 
+
+
+            ViewBag.paises = paises.ToList();
+           
 
 
             var tBL_TEKUS_SERVICIOS = db.TBL_TEKUS_SERVICIOS.Include(t => t.TBL_TEKUS_CLIENTES).Include(t => t.TBL_TEKUS_PAIS);

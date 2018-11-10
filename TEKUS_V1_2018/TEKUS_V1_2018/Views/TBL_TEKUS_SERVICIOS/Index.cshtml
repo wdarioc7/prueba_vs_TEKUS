@@ -12,8 +12,11 @@
 </p>
 <p>CANTIDAD DE SERVICIOS: @ViewBag.Servicios</p>
 <p>
-    @ViewBag.value ||
-@ViewBag.valor
+   
+
+        @Html.ListBox("ListaTareas", new SelectList(ViewBag.paises), htmlAttributes: new { @style = "width:280px;height :90px" })
+
+   
 </p>
 <table class="table">
     <tr>
