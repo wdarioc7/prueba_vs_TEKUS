@@ -17,15 +17,27 @@ namespace TEKUS_V1_2018.Controllers
         // GET: TBL_TEKUS_SERVICIOS
         public ActionResult Index()
         {
-
-            var tBL_TEKUS_SERVICIOS = db.TBL_TEKUS_SERVICIOS.Include(t => t.TBL_TEKUS_CLIENTES);
             @ViewBag.Servicios = db.TBL_TEKUS_SERVICIOS.Count();
-            foreach (var item in tBL_TEKUS_SERVICIOS)
-            {
-                var clientes = item.ID_CLIENTE;
-                
 
+            List<TBL_TEKUS_SERVICIOS> pais = db.TBL_TEKUS_SERVICIOS.ToList();
+            //var PAIS = pais.Distinct().Count();
+            //var paises = pais.GroupBy(x => x).Select(g => new { Value = g.Key, Count = g.Count() }).OrderByDescending(x => x.Count);
+
+            //Cito a leandro tutiny blog http://ltuttini.blogspot.com/2010/03/buscar-en-una-lista-contenido-repetido.html 
+            //PERMITE REALIZAR LA CONSULTA DE PAISES POR SERVICIO Y CALCULAR EL NUMERO DE EXISTENCIAS POR PALABRA -- BIG DATA
+            var paises = from item in pais
+                         let extension = item.ID_PAIS
+                         group item by extension into g
+                         select new { Key = g.Key, Values = g.Count() };
+            foreach (var item1 in paises)
+            {
+                ViewBag.value = item1.Key;
+                ViewBag.valor = item1.Values;
             }
+
+
+
+            var tBL_TEKUS_SERVICIOS = db.TBL_TEKUS_SERVICIOS.Include(t => t.TBL_TEKUS_CLIENTES).Include(t => t.TBL_TEKUS_PAIS);
             return View(tBL_TEKUS_SERVICIOS.ToList());
         }
 
@@ -48,6 +60,7 @@ namespace TEKUS_V1_2018.Controllers
         public ActionResult Create()
         {
             ViewBag.ID_CLIENTE = new SelectList(db.TBL_TEKUS_CLIENTES, "ID_CLIENTES", "NOMBRE");
+            ViewBag.ID_PAIS = new SelectList(db.TBL_TEKUS_PAIS, "ID_PAIS", "NOMBRE");
             return View();
         }
 
@@ -56,7 +69,7 @@ namespace TEKUS_V1_2018.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_SERVICIOS,NOMBRE,VPORHORA,ID_CLIENTE")] TBL_TEKUS_SERVICIOS tBL_TEKUS_SERVICIOS)
+        public ActionResult Create([Bind(Include = "ID_SERVICIOS,NOMBRE,VPORHORA,ID_CLIENTE,ID_PAIS")] TBL_TEKUS_SERVICIOS tBL_TEKUS_SERVICIOS)
         {
             if (ModelState.IsValid)
             {
@@ -66,6 +79,7 @@ namespace TEKUS_V1_2018.Controllers
             }
 
             ViewBag.ID_CLIENTE = new SelectList(db.TBL_TEKUS_CLIENTES, "ID_CLIENTES", "NOMBRE", tBL_TEKUS_SERVICIOS.ID_CLIENTE);
+            ViewBag.ID_PAIS = new SelectList(db.TBL_TEKUS_PAIS, "ID_PAIS", "NOMBRE", tBL_TEKUS_SERVICIOS.ID_PAIS);
             return View(tBL_TEKUS_SERVICIOS);
         }
 
@@ -82,6 +96,7 @@ namespace TEKUS_V1_2018.Controllers
                 return HttpNotFound();
             }
             ViewBag.ID_CLIENTE = new SelectList(db.TBL_TEKUS_CLIENTES, "ID_CLIENTES", "NOMBRE", tBL_TEKUS_SERVICIOS.ID_CLIENTE);
+            ViewBag.ID_PAIS = new SelectList(db.TBL_TEKUS_PAIS, "ID_PAIS", "NOMBRE", tBL_TEKUS_SERVICIOS.ID_PAIS);
             return View(tBL_TEKUS_SERVICIOS);
         }
 
@@ -90,7 +105,7 @@ namespace TEKUS_V1_2018.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_SERVICIOS,NOMBRE,VPORHORA,ID_CLIENTE")] TBL_TEKUS_SERVICIOS tBL_TEKUS_SERVICIOS)
+        public ActionResult Edit([Bind(Include = "ID_SERVICIOS,NOMBRE,VPORHORA,ID_CLIENTE,ID_PAIS")] TBL_TEKUS_SERVICIOS tBL_TEKUS_SERVICIOS)
         {
             if (ModelState.IsValid)
             {
@@ -99,6 +114,7 @@ namespace TEKUS_V1_2018.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.ID_CLIENTE = new SelectList(db.TBL_TEKUS_CLIENTES, "ID_CLIENTES", "NOMBRE", tBL_TEKUS_SERVICIOS.ID_CLIENTE);
+            ViewBag.ID_PAIS = new SelectList(db.TBL_TEKUS_PAIS, "ID_PAIS", "NOMBRE", tBL_TEKUS_SERVICIOS.ID_PAIS);
             return View(tBL_TEKUS_SERVICIOS);
         }
 

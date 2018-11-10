@@ -11,6 +11,10 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <p>CANTIDAD DE SERVICIOS: @ViewBag.Servicios</p>
+<p>
+    @ViewBag.value ||
+@ViewBag.valor
+</p>
 <table class="table">
     <tr>
         <th>
@@ -22,26 +26,33 @@
         <th>
             @Html.DisplayNameFor(model => model.TBL_TEKUS_CLIENTES.NOMBRE)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TBL_TEKUS_PAIS.NOMBRE)
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NOMBRE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VPORHORA)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TBL_TEKUS_CLIENTES.NOMBRE)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_SERVICIOS }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_SERVICIOS }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_SERVICIOS })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOMBRE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VPORHORA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TBL_TEKUS_CLIENTES.NOMBRE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TBL_TEKUS_PAIS.NOMBRE)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID_SERVICIOS }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID_SERVICIOS }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID_SERVICIOS })
+            </td>
+        </tr>
+    }
 
 </table>

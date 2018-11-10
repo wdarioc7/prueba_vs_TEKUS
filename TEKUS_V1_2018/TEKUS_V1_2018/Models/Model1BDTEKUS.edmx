@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="sisteman_TEKUSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="sisteman_TEKUSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="TBL_TEKUS_CLIENTES">
           <Key>
             <PropertyRef Name="ID_CLIENTES" />
@@ -30,6 +30,7 @@
           <Property Name="NOMBRE" Type="nvarchar(max)" />
           <Property Name="VPORHORA" Type="money" />
           <Property Name="ID_CLIENTE" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ID_PAIS" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <Association Name="FK_TBL_TEKUS_CLIENTES_TBL_TEKUS_PAIS">
           <End Role="TBL_TEKUS_PAIS" Type="Self.TBL_TEKUS_PAIS" Multiplicity="0..1" />
@@ -39,6 +40,18 @@
               <PropertyRef Name="ID_PAIS" />
             </Principal>
             <Dependent Role="TBL_TEKUS_CLIENTES">
+              <PropertyRef Name="ID_PAIS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_TEKUS_SERVICIOS_TBL_TEKUS_PAIS">
+          <End Role="TBL_TEKUS_PAIS" Type="Self.TBL_TEKUS_PAIS" Multiplicity="0..1" />
+          <End Role="TBL_TEKUS_SERVICIOS" Type="Self.TBL_TEKUS_SERVICIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_TEKUS_PAIS">
+              <PropertyRef Name="ID_PAIS" />
+            </Principal>
+            <Dependent Role="TBL_TEKUS_SERVICIOS">
               <PropertyRef Name="ID_PAIS" />
             </Dependent>
           </ReferentialConstraint>
@@ -63,13 +76,16 @@
             <End Role="TBL_TEKUS_PAIS" EntitySet="TBL_TEKUS_PAIS" />
             <End Role="TBL_TEKUS_CLIENTES" EntitySet="TBL_TEKUS_CLIENTES" />
           </AssociationSet>
+          <AssociationSet Name="FK_TBL_TEKUS_SERVICIOS_TBL_TEKUS_PAIS" Association="Self.FK_TBL_TEKUS_SERVICIOS_TBL_TEKUS_PAIS">
+            <End Role="TBL_TEKUS_PAIS" EntitySet="TBL_TEKUS_PAIS" />
+            <End Role="TBL_TEKUS_SERVICIOS" EntitySet="TBL_TEKUS_SERVICIOS" />
+          </AssociationSet>
           <AssociationSet Name="FK_TBL_TEKUS_SERVICIOS_TBL_TEKUS_SERVICIOS" Association="Self.FK_TBL_TEKUS_SERVICIOS_TBL_TEKUS_SERVICIOS">
             <End Role="TBL_TEKUS_CLIENTES" EntitySet="TBL_TEKUS_CLIENTES" />
             <End Role="TBL_TEKUS_SERVICIOS" EntitySet="TBL_TEKUS_SERVICIOS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="sisteman_TEKUSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -83,7 +99,7 @@
           <Property Name="CORREOE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ID_PAIS" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="TBL_TEKUS_PAIS" Relationship="Self.FK_TBL_TEKUS_CLIENTES_TBL_TEKUS_PAIS" FromRole="TBL_TEKUS_CLIENTES" ToRole="TBL_TEKUS_PAIS" />
-          <NavigationProperty Name="TBL_TEKUS_SERVICIOS" Relationship="Self.FK_TBL_TEKUS_SERVICIOS_TBL_TEKUS_SERVICIOS" FromRole="TBL_TEKUS_CLIENTES" ToRole="TBL_TEKUS_SERVICIOS" />
+          <NavigationProperty Name="TBL_TEKUS_SERVICIOS" Relationship="sisteman_TEKUSModel.FK_TBL_TEKUS_SERVICIOS_TBL_TEKUS_SERVICIOS" FromRole="TBL_TEKUS_CLIENTES" ToRole="TBL_TEKUS_SERVICIOS" />
         </EntityType>
         <EntityType Name="TBL_TEKUS_PAIS">
           <Key>
@@ -92,16 +108,7 @@
           <Property Name="ID_PAIS" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TBL_TEKUS_CLIENTES" Relationship="Self.FK_TBL_TEKUS_CLIENTES_TBL_TEKUS_PAIS" FromRole="TBL_TEKUS_PAIS" ToRole="TBL_TEKUS_CLIENTES" />
-        </EntityType>
-        <EntityType Name="TBL_TEKUS_SERVICIOS">
-          <Key>
-            <PropertyRef Name="ID_SERVICIOS" />
-          </Key>
-          <Property Name="ID_SERVICIOS" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NOMBRE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="VPORHORA" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="ID_CLIENTE" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="TBL_TEKUS_CLIENTES" Relationship="Self.FK_TBL_TEKUS_SERVICIOS_TBL_TEKUS_SERVICIOS" FromRole="TBL_TEKUS_SERVICIOS" ToRole="TBL_TEKUS_CLIENTES" />
+          <NavigationProperty Name="TBL_TEKUS_SERVICIOS" Relationship="sisteman_TEKUSModel.FK_TBL_TEKUS_SERVICIOS_TBL_TEKUS_PAIS" FromRole="TBL_TEKUS_PAIS" ToRole="TBL_TEKUS_SERVICIOS" />
         </EntityType>
         <Association Name="FK_TBL_TEKUS_CLIENTES_TBL_TEKUS_PAIS">
           <End Role="TBL_TEKUS_PAIS" Type="Self.TBL_TEKUS_PAIS" Multiplicity="0..1" />
@@ -115,9 +122,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="sisteman_TEKUSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBL_TEKUS_CLIENTES" EntityType="Self.TBL_TEKUS_CLIENTES" />
+          <EntitySet Name="TBL_TEKUS_PAIS" EntityType="Self.TBL_TEKUS_PAIS" />
+          <AssociationSet Name="FK_TBL_TEKUS_CLIENTES_TBL_TEKUS_PAIS" Association="Self.FK_TBL_TEKUS_CLIENTES_TBL_TEKUS_PAIS">
+            <End Role="TBL_TEKUS_PAIS" EntitySet="TBL_TEKUS_PAIS" />
+            <End Role="TBL_TEKUS_CLIENTES" EntitySet="TBL_TEKUS_CLIENTES" />
+          </AssociationSet>
+          <EntitySet Name="TBL_TEKUS_SERVICIOS" EntityType="sisteman_TEKUSModel.TBL_TEKUS_SERVICIOS" />
+          <AssociationSet Name="FK_TBL_TEKUS_SERVICIOS_TBL_TEKUS_SERVICIOS" Association="sisteman_TEKUSModel.FK_TBL_TEKUS_SERVICIOS_TBL_TEKUS_SERVICIOS">
+            <End Role="TBL_TEKUS_CLIENTES" EntitySet="TBL_TEKUS_CLIENTES" />
+            <End Role="TBL_TEKUS_SERVICIOS" EntitySet="TBL_TEKUS_SERVICIOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TEKUS_SERVICIOS_TBL_TEKUS_PAIS" Association="sisteman_TEKUSModel.FK_TBL_TEKUS_SERVICIOS_TBL_TEKUS_PAIS">
+            <End Role="TBL_TEKUS_PAIS" EntitySet="TBL_TEKUS_PAIS" />
+            <End Role="TBL_TEKUS_SERVICIOS" EntitySet="TBL_TEKUS_SERVICIOS" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="TBL_TEKUS_SERVICIOS">
+          <Key>
+            <PropertyRef Name="ID_SERVICIOS" />
+          </Key>
+          <Property Name="ID_SERVICIOS" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VPORHORA" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ID_CLIENTE" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ID_PAIS" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="TBL_TEKUS_CLIENTES" Relationship="sisteman_TEKUSModel.FK_TBL_TEKUS_SERVICIOS_TBL_TEKUS_SERVICIOS" FromRole="TBL_TEKUS_SERVICIOS" ToRole="TBL_TEKUS_CLIENTES" />
+          <NavigationProperty Name="TBL_TEKUS_PAIS" Relationship="sisteman_TEKUSModel.FK_TBL_TEKUS_SERVICIOS_TBL_TEKUS_PAIS" FromRole="TBL_TEKUS_SERVICIOS" ToRole="TBL_TEKUS_PAIS" />
+        </EntityType>
         <Association Name="FK_TBL_TEKUS_SERVICIOS_TBL_TEKUS_SERVICIOS">
-          <End Role="TBL_TEKUS_CLIENTES" Type="Self.TBL_TEKUS_CLIENTES" Multiplicity="0..1" />
-          <End Role="TBL_TEKUS_SERVICIOS" Type="Self.TBL_TEKUS_SERVICIOS" Multiplicity="*" />
+          <End Type="sisteman_TEKUSModel.TBL_TEKUS_CLIENTES" Role="TBL_TEKUS_CLIENTES" Multiplicity="0..1" />
+          <End Type="sisteman_TEKUSModel.TBL_TEKUS_SERVICIOS" Role="TBL_TEKUS_SERVICIOS" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TBL_TEKUS_CLIENTES">
               <PropertyRef Name="ID_CLIENTES" />
@@ -127,19 +163,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="sisteman_TEKUSEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="TBL_TEKUS_CLIENTES" EntityType="Self.TBL_TEKUS_CLIENTES" />
-          <EntitySet Name="TBL_TEKUS_PAIS" EntityType="Self.TBL_TEKUS_PAIS" />
-          <EntitySet Name="TBL_TEKUS_SERVICIOS" EntityType="Self.TBL_TEKUS_SERVICIOS" />
-          <AssociationSet Name="FK_TBL_TEKUS_CLIENTES_TBL_TEKUS_PAIS" Association="Self.FK_TBL_TEKUS_CLIENTES_TBL_TEKUS_PAIS">
-            <End Role="TBL_TEKUS_PAIS" EntitySet="TBL_TEKUS_PAIS" />
-            <End Role="TBL_TEKUS_CLIENTES" EntitySet="TBL_TEKUS_CLIENTES" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TBL_TEKUS_SERVICIOS_TBL_TEKUS_SERVICIOS" Association="Self.FK_TBL_TEKUS_SERVICIOS_TBL_TEKUS_SERVICIOS">
-            <End Role="TBL_TEKUS_CLIENTES" EntitySet="TBL_TEKUS_CLIENTES" />
-            <End Role="TBL_TEKUS_SERVICIOS" EntitySet="TBL_TEKUS_SERVICIOS" />
-          </AssociationSet>
-        </EntityContainer>
+        <Association Name="FK_TBL_TEKUS_SERVICIOS_TBL_TEKUS_PAIS">
+          <End Type="sisteman_TEKUSModel.TBL_TEKUS_PAIS" Role="TBL_TEKUS_PAIS" Multiplicity="0..1" />
+          <End Type="sisteman_TEKUSModel.TBL_TEKUS_SERVICIOS" Role="TBL_TEKUS_SERVICIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_TEKUS_PAIS">
+              <PropertyRef Name="ID_PAIS" />
+            </Principal>
+            <Dependent Role="TBL_TEKUS_SERVICIOS">
+              <PropertyRef Name="ID_PAIS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -168,10 +203,11 @@
           <EntitySetMapping Name="TBL_TEKUS_SERVICIOS">
             <EntityTypeMapping TypeName="sisteman_TEKUSModel.TBL_TEKUS_SERVICIOS">
               <MappingFragment StoreEntitySet="TBL_TEKUS_SERVICIOS">
-                <ScalarProperty Name="ID_SERVICIOS" ColumnName="ID_SERVICIOS" />
-                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
-                <ScalarProperty Name="VPORHORA" ColumnName="VPORHORA" />
+                <ScalarProperty Name="ID_PAIS" ColumnName="ID_PAIS" />
                 <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="VPORHORA" ColumnName="VPORHORA" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID_SERVICIOS" ColumnName="ID_SERVICIOS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

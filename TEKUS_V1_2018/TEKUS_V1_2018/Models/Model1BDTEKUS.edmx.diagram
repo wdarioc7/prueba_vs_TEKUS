@@ -7,9 +7,10 @@
       <Diagram DiagramId="7378e7bd41494d36bfb56a1afc79bdc0" Name="Diagram1">
         <EntityTypeShape EntityType="sisteman_TEKUSModel.TBL_TEKUS_CLIENTES" Width="1.75" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="sisteman_TEKUSModel.TBL_TEKUS_PAIS" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="sisteman_TEKUSModel.TBL_TEKUS_SERVICIOS" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="sisteman_TEKUSModel.FK_TBL_TEKUS_CLIENTES_TBL_TEKUS_PAIS" ManuallyRouted="false" />
-        <AssociationConnector Association="sisteman_TEKUSModel.FK_TBL_TEKUS_SERVICIOS_TBL_TEKUS_SERVICIOS" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="sisteman_TEKUSModel.TBL_TEKUS_SERVICIOS" Width="1.5" PointX="5.5" PointY="1" />
+        <AssociationConnector Association="sisteman_TEKUSModel.FK_TBL_TEKUS_SERVICIOS_TBL_TEKUS_SERVICIOS" />
+        <AssociationConnector Association="sisteman_TEKUSModel.FK_TBL_TEKUS_SERVICIOS_TBL_TEKUS_PAIS" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

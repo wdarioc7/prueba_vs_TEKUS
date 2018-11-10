@@ -18,7 +18,9 @@ namespace TEKUS_V1_2018.Models
         public string NOMBRE { get; set; }
         public Nullable<decimal> VPORHORA { get; set; }
         public Nullable<decimal> ID_CLIENTE { get; set; }
+        public Nullable<decimal> ID_PAIS { get; set; }
     
         public virtual TBL_TEKUS_CLIENTES TBL_TEKUS_CLIENTES { get; set; }
+        public virtual TBL_TEKUS_PAIS TBL_TEKUS_PAIS { get; set; }
     }
 }

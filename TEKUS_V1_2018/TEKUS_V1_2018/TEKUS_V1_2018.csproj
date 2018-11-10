@@ -259,6 +259,7 @@
     <Content Include="Views\TBL_TEKUS_SERVICIOS\Details.cshtml" />
     <Content Include="Views\TBL_TEKUS_SERVICIOS\Edit.cshtml" />
     <Content Include="Views\TBL_TEKUS_SERVICIOS\Index.cshtml" />
+    <Content Include="Views\TBL_TEKUS_SERVICIOS\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

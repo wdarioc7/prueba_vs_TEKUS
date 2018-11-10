@@ -18,6 +18,7 @@ namespace TEKUS_V1_2018.Models
         public TBL_TEKUS_PAIS()
         {
             this.TBL_TEKUS_CLIENTES = new HashSet<TBL_TEKUS_CLIENTES>();
+            this.TBL_TEKUS_SERVICIOS = new HashSet<TBL_TEKUS_SERVICIOS>();
         }
     
         public decimal ID_PAIS { get; set; }
@@ -25,5 +26,7 @@ namespace TEKUS_V1_2018.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_TEKUS_CLIENTES> TBL_TEKUS_CLIENTES { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_TEKUS_SERVICIOS> TBL_TEKUS_SERVICIOS { get; set; }
     }
 }
