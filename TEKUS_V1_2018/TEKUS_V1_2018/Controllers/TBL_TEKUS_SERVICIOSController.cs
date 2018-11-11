@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TEKUS_V1_2018.Models;
+using PagedList;
 
 namespace TEKUS_V1_2018.Controllers
 {
@@ -39,7 +40,7 @@ namespace TEKUS_V1_2018.Controllers
         //    var tBL_TEKUS_SERVICIOS = db.TBL_TEKUS_SERVICIOS.Include(t => t.TBL_TEKUS_CLIENTES).Include(t => t.TBL_TEKUS_PAIS);
         //    return View(tBL_TEKUS_SERVICIOS.ToList());
         //}
-        public ViewResult Index(string sortOrder)
+        public ViewResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
             @ViewBag.Servicios = db.TBL_TEKUS_SERVICIOS.Count();
 
@@ -57,10 +58,25 @@ namespace TEKUS_V1_2018.Controllers
 
 
             ViewBag.paises = paises.ToList();
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "ProductName desc" : "";
             ViewBag.UnitPriceSortParm = sortOrder == "UnitPrice" ? "UnitPrice desc" : "UnitPrice";
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
 
+            ViewBag.CurrentFilter = searchString;
             var products = db.TBL_TEKUS_SERVICIOS.Include(t => t.TBL_TEKUS_CLIENTES).Include(t => t.TBL_TEKUS_PAIS);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.NOMBRE.Contains(searchString));
+            }
 
             switch (sortOrder)
             {
@@ -77,7 +93,11 @@ namespace TEKUS_V1_2018.Controllers
                     products = products.OrderBy(s => s.NOMBRE);
                     break;
             }
-            return View(products.ToList());
+
+            int pageSize = 6;
+            int pageNumber = (page ?? 1);
+            
+            return View(products.ToPagedList(pageNumber, pageSize));
         }
         // GET: TBL_TEKUS_SERVICIOS/Details/5
         public ActionResult Details(decimal id)
