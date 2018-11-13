@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TEKUS_V1_2018.Models;
+using PagedList;
 
 namespace TEKUS_V1_2018.Controllers
 {
@@ -15,11 +16,70 @@ namespace TEKUS_V1_2018.Controllers
         private sisteman_TEKUSEntities db = new sisteman_TEKUSEntities();
 
         // GET: TBL_TEKUS_CLIENTES
-        public ActionResult Index()
+       public ViewResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
             var tBL_TEKUS_CLIENTES = db.TBL_TEKUS_CLIENTES.Include(t => t.TBL_TEKUS_PAIS);
             @ViewBag.TotalClientes = db.TBL_TEKUS_CLIENTES.Count();
-            return View(tBL_TEKUS_CLIENTES.ToList());
+
+            List<TBL_TEKUS_SERVICIOS> pais = db.TBL_TEKUS_SERVICIOS.ToList();
+            //var PAIS = pais.Distinct().Count();
+            //var paises = pais.GroupBy(x => x).Select(g => new { Value = g.Key, Count = g.Count() }).OrderByDescending(x => x.Count);
+
+            //Cito a leandro tutiny blog http://ltuttini.blogspot.com/2010/03/buscar-en-una-lista-contenido-repetido.html 
+            //PERMITE REALIZAR LA CONSULTA DE PAISES POR SERVICIO Y CALCULAR EL NUMERO DE EXISTENCIAS POR PALABRA -- BIG DATA
+            var paises = from item in pais
+                         let extension = item.ID_PAIS
+                         group item by extension into g
+                         select new { Key = g.Key, Values = g.Count() };
+
+
+
+            ViewBag.paises = paises.ToList();
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.Nit = String.IsNullOrEmpty(sortOrder) ? "Nit" : "";
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "ProductName desc" : "";
+            ViewBag.Correo = String.IsNullOrEmpty(sortOrder) ? "Correo" : "";
+            ViewBag.UnitPriceSortParm = sortOrder == "UnitPrice" ? "UnitPrice desc" : "UnitPrice";
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+            var products = db.TBL_TEKUS_CLIENTES.Include(t => t.TBL_TEKUS_PAIS);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.NOMBRE.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "Nit":
+                    products = products.OrderByDescending(s => s.NIT);
+                    break;
+                case "NameSortParm":
+                    products = products.OrderByDescending(s => s.NOMBRE);
+                    break;
+                case "Correo":
+                    products = products.OrderByDescending(s => s.CORREOE);
+                    break;
+                //case "UnitPrice desc":
+                //    products = products.OrderByDescending(s => s.ID_SERVICIOS);
+                //    break;
+                default:
+                    products = products.OrderBy(s => s.NOMBRE);
+                    break;
+            }
+
+            int pageSize = 6;
+            int pageNumber = (page ?? 1);
+
+            return View(products.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: TBL_TEKUS_CLIENTES/Details/5
