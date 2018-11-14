@@ -68,6 +68,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_DATA_DELETE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="sisteman_dario" />
         <EntityContainer Name="sisteman_TEKUSModelStoreContainer">
           <EntitySet Name="TBL_TEKUS_CLIENTES" EntityType="Self.TBL_TEKUS_CLIENTES" Schema="sisteman_dario" store:Type="Tables" />
           <EntitySet Name="TBL_TEKUS_PAIS" EntityType="Self.TBL_TEKUS_PAIS" Schema="sisteman_dario" store:Type="Tables" />
@@ -138,6 +139,7 @@
             <End Role="TBL_TEKUS_PAIS" EntitySet="TBL_TEKUS_PAIS" />
             <End Role="TBL_TEKUS_SERVICIOS" EntitySet="TBL_TEKUS_SERVICIOS" />
           </AssociationSet>
+          <FunctionImport Name="SP_DATA_DELETE" />
         </EntityContainer>
         <EntityType Name="TBL_TEKUS_SERVICIOS">
           <Key>
@@ -211,6 +213,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_DATA_DELETE" FunctionName="sisteman_TEKUSModel.Store.SP_DATA_DELETE" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

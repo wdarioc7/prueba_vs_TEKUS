@@ -45,11 +45,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dibware.Helpers, Version=1.1.1.9775, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dibware.Helpers.1.1.1\lib\Dibware.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Dibware.StoredProcedureFramework, Version=1.0.3.22595, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dibware.StoredProcedureFramework.1.0.3\lib\Dibware.StoredProcedureFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Dibware.StoredProcedureFrameworkForEF, Version=1.0.3.23367, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dibware.StoredProcedureFrameworkForEF.1.0.3\lib\Dibware.StoredProcedureFrameworkForEF.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="JetBrains.Annotations, Version=10.1.5.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.10.1.5\lib\net\JetBrains.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
@@ -2518,6 +2530,7 @@
     <Content Include="scss\_nav.scss" />
     <Content Include="scss\_resume-item.scss" />
     <Content Include="scss\_variables.scss" />
+    <Content Include="Views\TBL_TEKUS_SERVICIOS\DeleteTotal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Angular\" />

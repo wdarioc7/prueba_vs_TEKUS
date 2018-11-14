@@ -12,6 +12,8 @@ namespace TEKUS_V1_2018.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class sisteman_TEKUSEntities : DbContext
     {
@@ -28,5 +30,10 @@ namespace TEKUS_V1_2018.Models
         public virtual DbSet<TBL_TEKUS_CLIENTES> TBL_TEKUS_CLIENTES { get; set; }
         public virtual DbSet<TBL_TEKUS_PAIS> TBL_TEKUS_PAIS { get; set; }
         public virtual DbSet<TBL_TEKUS_SERVICIOS> TBL_TEKUS_SERVICIOS { get; set; }
+    
+        public virtual int SP_DATA_DELETE()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DATA_DELETE");
+        }
     }
 }

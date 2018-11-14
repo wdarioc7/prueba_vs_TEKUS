@@ -1,0 +1,22 @@
+﻿@model TEKUS_V1_2018.Models.TBL_TEKUS_SERVICIOS
+
+@{
+    ViewBag.Title = "DeleteTotal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete Total</h2>
+
+<h3>Esta seguro de eliminar todos los registros de la base de datos?</h3>
+<div>
+    
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

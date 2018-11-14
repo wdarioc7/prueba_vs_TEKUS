@@ -4,10 +4,10 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using TEKUS_V1_2018.Models;
 using PagedList;
+using Dibware.StoredProcedureFramework;
 
 namespace TEKUS_V1_2018.Controllers
 {
@@ -198,6 +198,30 @@ namespace TEKUS_V1_2018.Controllers
         {
             TBL_TEKUS_SERVICIOS tBL_TEKUS_SERVICIOS = db.TBL_TEKUS_SERVICIOS.Find(id);
             db.TBL_TEKUS_SERVICIOS.Remove(tBL_TEKUS_SERVICIOS);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        // GET: TBL_TEKUS_SERVICIOS/Delete/5
+        public ActionResult DeleteTotal()
+        {
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //TBL_TEKUS_SERVICIOS tBL_TEKUS_SERVICIOS = db.TBL_TEKUS_SERVICIOS.ToList();
+            //if (tBL_TEKUS_SERVICIOS == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            return View();
+        }
+
+        // POST: TBL_TEKUS_SERVICIOS/Delete/5
+        [HttpPost, ActionName("DeleteTotal")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmedTotal()
+        {
+            db.SP_DATA_DELETE();
             db.SaveChanges();
             return RedirectToAction("Index");
         }
