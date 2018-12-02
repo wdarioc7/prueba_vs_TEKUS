@@ -7,28 +7,28 @@
     <title>@ViewBag.Title - TEKUS</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    
+    @Styles.Render("~/Content/toastr.css")
     <!--TEMPLATE BOOTSTRAP-->
 
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-       
 
-        <!-- Bootstrap core CSS -->
-        <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Custom fonts for this template -->
-        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
-        <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Custom styles for this template -->
-        <link href="~/css/resume.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
+    <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
 
-    
+    <!-- Custom styles for this template -->
+    <link href="~/css/resume.min.css" rel="stylesheet">
+
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -45,10 +45,11 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
                     @*<li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>*@
+        <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>*@
 
                     <li>@Html.ActionLink("Clientes", "Index", "TBL_TEKUS_CLIENTES")</li>
                     <li>@Html.ActionLink("Servicios", "Index", "TBL_TEKUS_SERVICIOS")</li>
+                    <li>@Html.ActionLink("Servicios RESTFULL", "GetTBL_TEKUS_CLIENTES", "TBL_TEKUS_CLIENTESWAPI")</li>
                     @*<li>@Html.ActionLink("Clientes", "Index", "TBL_TEKUS_SERVICIOS")</li>*@
                 </ul>
             </div>
@@ -98,6 +99,8 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/angularJs")
+    @Scripts.Render("~/bundles/Mipack")
     @RenderSection("scripts", required: false)
 </body>
 </html>

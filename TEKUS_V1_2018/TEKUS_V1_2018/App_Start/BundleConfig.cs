@@ -22,9 +22,20 @@ namespace TEKUS_V1_2018
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            bundles.Add(new StyleBundle("~/bundles/Mipack").Include(
+                             "~/Scripts/app/Myapp.js"
+                    
+                     ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/angularJs").Include(
+                      "~/Scripts/angular.js"));
+
+            bundles.Add(new StyleBundle("~/Content/toastr").Include(
+                        "~/Content/toastr.css"));
         }
     }
 }

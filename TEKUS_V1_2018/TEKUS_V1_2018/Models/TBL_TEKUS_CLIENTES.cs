@@ -9,9 +9,13 @@
 
 namespace TEKUS_V1_2018.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+    using System.Web.Script.Serialization;
+
+    //[DataContract(IsReference = true)]
     public partial class TBL_TEKUS_CLIENTES
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using TEKUS_V1_2018.Models;
 using PagedList;
+using Newtonsoft.Json;
 
 namespace TEKUS_V1_2018.Controllers
 {
@@ -80,6 +81,21 @@ namespace TEKUS_V1_2018.Controllers
             int pageNumber = (page ?? 1);
 
             return View(products.ToPagedList(pageNumber, pageSize));
+        }
+        //get Angular js
+        public JsonResult Get_AllClientes()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            List<TBL_TEKUS_CLIENTES> Emp = db.TBL_TEKUS_CLIENTES.ToList();
+                return this.Json(Emp, JsonRequestBehavior.AllowGet);
+           
+        }
+        public ActionResult Get_AllClientes1()
+        {
+
+            List<TBL_TEKUS_CLIENTES> Emp = db.TBL_TEKUS_CLIENTES.ToList();
+            return View(Emp);
+
         }
 
         // GET: TBL_TEKUS_CLIENTES/Details/5

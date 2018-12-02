@@ -7,6 +7,8 @@
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+
 <style>
     table.blueTable {
         border: 1px solid #1C6EA4;
@@ -76,7 +78,33 @@
                 }
 </style>
 <h2>Index</h2>
+<div  ng-app="Myapp">
+    <div ng-controller="myCtrl" ng-init="GetAllData()" class="divList">
+        <table class="table">
+            <tr>
+                <th>
+                    NIT
+                </th>
+                <th>
+                    NOMBRE DEL CLIENTE
+                </th>
+                <th>
+                    CORREO ELECTRONICO
+                </th>
 
+                <th></th>
+            </tr>
+            <tr data-ng-repeat="Emp in clientes">
+                <td>{{Emp.NIT}}</td>
+                <td>{{Emp.NOMBRE}}</td>
+                <td>{{Emp.CORREOE}}</td>
+                <td></td>
+            </tr>
+
+
+        </table>
+    </div>
+</div>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -134,7 +162,7 @@
 
 </table>
 <br />
-        Page @(Model.PageNumber) of @Model.PageCount
+    Page @(Model.PageNumber) of @Model.PageCount
 
-        @Html.PagedListPager(Model, page => Url.Action("Index",
-            new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
